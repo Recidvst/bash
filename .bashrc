@@ -1,4 +1,5 @@
-PS1="\$(check_network_status)\[\e[2;37m\]\t\[\e[m\] \[\e[2;36m\]\$(show_hostname)\u\[\e[m\] \[\e[0;34m\] \W\[\e[m\] \$(parse_git_branch) \$(parse_git_dirty)\$(check_jobs) \[\e[5;37m\]\[\e[m\] "
+PS1="\$(check_network_status)\[\e[2;37m\]\t\[\e[m\] \[\e[2;36m\]\$(show_hostname)\u\[\e[m\] \[\e[0;34m\] \W\[\e[m\]\$(parse_git_branch)\$(parse_git_dirty)\$(check_jobs) \[\e[5;37m\]\[\e[m\] "
+
 PS2="\[\e[5;31m\] "
 PS3="\[\e[5;34m\] "
 PS4="\[\e[37m\] "
@@ -20,17 +21,20 @@ function parse_git_dirty {
 function parse_git_branch {
   BRANCH=$(git rev-parse --abbrev-ref HEAD 2> /dev/null)
   if [[ -n "$BRANCH" ]]; then
-    printf "\e[1;35m $BRANCH\e[m"
+    printf "\e[1;35m  $BRANCH \e[m"
   fi
 }
 
 function check_jobs {
+  # Get the number of jobs
   job_count=$(jobs -p | wc -l)
 
   # Check if there is one or more jobs
   if [ "$job_count" -gt 0 ]; then
+    # Print an icon (you can replace the icon with any symbol you prefer)
     printf "\e[5;33m󰜎$job_count\e[m"
   else
+    # Print nothing if there are zero jobs
     printf ""
   fi
 }
@@ -84,7 +88,7 @@ check_network_status() {
 
 function show_hostname {
   hostname=$(hostname)
-  if [[ "$hostname" != "XXX" ]]; then
+  if [[ "$hostname" != "WL541335" ]]; then
     echo -e "$hostname/"
   fi
 }
