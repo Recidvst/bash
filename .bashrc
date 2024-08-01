@@ -1,5 +1,21 @@
+#  ALIASES
+# ===========
+
+# alias ls to print more usefully
+alias ll="ls -ltah"
+# alias cat to bat
+alias cat="bat"
+# print public IP
+alias myip="curl ipinfo.io/ip; echo -e '\r'"
+# fortune + cowsay
+alias cow="~/fortune.exe ~/fortunes.dat | cowsay -b"
+
 #  SPLASH
 # ===========
+
+cow
+
+echo -e "\n\n"
 
 neofetch --memory_percent on --memory_unit gib --shell_path on --color_blocks off --ascii_distro Windows7
 
@@ -11,16 +27,6 @@ PS1="\$(check_network_status)\[\e[2;37m\]\t\[\e[m\] \[\e[2;36m\]\$(show_hostname
 PS2="\[\e[5;31m\] "
 PS3="\[\e[5;34m\] "
 PS4="\[\e[37m\] "
-
-#  ALIASES
-# ===========
-
-# alias ls to print more usefully
-alias ll="ls -ltah"
-# alias cat to bat
-alias cat="bat"
-# print public IP
-alias myip="curl ipinfo.io/ip; echo -e '\r'"
 
 # SCREENSAVERS
 # ===========
