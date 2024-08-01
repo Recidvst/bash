@@ -1,8 +1,34 @@
+#  SPLASH
+# ===========
+
+neofetch --memory_percent on --memory_unit gib --shell_path --color_blocks off --ascii_distro Windows7
+
+#  PROMPTS
+# ===========
+
 PS1="\$(check_network_status)\[\e[2;37m\]\t\[\e[m\] \[\e[2;36m\]\$(show_hostname)\u\[\e[m\] \[\e[0;34m\] \W\[\e[m\]\$(parse_git_branch)\$(parse_git_dirty)\$(check_jobs) \[\e[5;37m\]\[\e[m\] "
 
 PS2="\[\e[5;31m\] "
 PS3="\[\e[5;34m\] "
 PS4="\[\e[37m\] "
+
+#  ALIASES
+# ===========
+
+# alias ls to print more usefully
+alias ll="ls -ltah"
+# alias cat to bat
+alias cat="bat"
+# print public IP
+alias myip="curl ipinfo.io/ip; echo -e '\r'"
+
+# SCREENSAVERS
+# ===========
+
+alias pipes='bash ~/pipes.sh'
+
+#  FUNCTIONS
+# ===========
 
 function parse_git_dirty {
   STATUS="$(git status 2> /dev/null)"
