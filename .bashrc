@@ -1,7 +1,7 @@
 #  SPLASH
 # ===========
 
-neofetch --memory_percent on --memory_unit gib --shell_path --color_blocks off --ascii_distro Windows7
+neofetch --memory_percent on --memory_unit gib --shell_path on --color_blocks off --ascii_distro Windows7
 
 #  PROMPTS
 # ===========
