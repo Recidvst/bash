@@ -1,2 +1,5 @@
 # dotfiles
-- Current bashrc and inputrc files with some customisations like colours, git status, job status etc.
+- .bashrc
+- .inputrc
+- .gitconfig
+- Some binaries for bat, cowsay etc.
