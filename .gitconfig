@@ -1,0 +1,11 @@
+[user]
+	email = XXX
+	name = Chris Snowden
+	password = XXX
+[core]
+	autocrlf = input
+	longpaths = true
+[auto]
+	crlf = true
+[pull]
+	rebase = true
