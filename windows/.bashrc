@@ -7,22 +7,22 @@ alias ll="ls -ltah"
 alias cat="bat"
 # print public IP
 alias myip="curl ipinfo.io/ip; echo -e '\r'"
-# fortune + cowsay
-alias cow="~/fortune.exe ~/fortunes.dat | cowsay -b"
+# neofetch with args
+alias nf="neofetch --memory_percent on --memory_unit gib --shell_path on --color_blocks off --ascii_distro Windows7"
 
 #  SPLASH
 # ===========
 
-cow
-
-echo -e "\n\n"
-
-neofetch --memory_percent on --memory_unit gib --shell_path on --color_blocks off --ascii_distro Windows7
+echo -e "\n"
+nf
 
 #  PROMPTS
 # ===========
 
-PS1="\$(check_network_status)\[\e[2;37m\]\t\[\e[m\] \[\e[2;36m\]\$(show_hostname)\u\[\e[m\] \[\e[0;34m\] \W\[\e[m\]\$(parse_git_branch)\$(parse_git_dirty)\$(check_jobs) \[\e[5;37m\]\[\e[m\] "
+PS1="\$(check_network_status)\[\e[2;37m\]\t\[\e[m\] \[\e[2;36m\]\$(show_hostname)\u\[\e[m\] \[\e[0;34m\] \W\[\e[m\]\$(parse_git_branch)\$(parse_git_dirty)\$(check_jobs) \[\e[35m\]\$(show_sdk_versions)\[\e[m\]\[\e[5;37m\]\[\e[m\] "
+PS1+=$'\n'
+
+# \[\e[35m\]\$(show_sdk_versions)\[\e[m\]
 
 PS2="\[\e[5;31m\] "
 PS3="\[\e[5;34m\] "
@@ -123,4 +123,35 @@ function show_hostname {
   if [[ "$hostname" != "WL541335" ]]; then
     echo -e "$hostname/"
   fi
+}
+
+function show_sdk_versions() {
+  local versions=""
+
+  # Check if we're in a Git repository
+  if git rev-parse --is-inside-work-tree &> /dev/null; then
+
+    # Check if Node.js is installed and if package.json exists
+    if command -v node &> /dev/null && git ls-files --error-unmatch '*.js' &> /dev/null; then
+      versions+="Node: $(nvm current) "
+    fi
+
+    # Check if Python is installed
+    if command -v python &> /dev/null && git ls-files --error-unmatch '*.py' &> /dev/null; then
+      versions+="Python: $(python --version | awk '{print $2}') "
+    fi
+
+    # Check if .NET is installed
+    if command -v dotnet &> /dev/null && git ls-files --error-unmatch '*.cs' &> /dev/null; then
+      versions+=".NET: $(dotnet --version) "
+    fi
+
+    # Go version if installed
+    if command -v go &> /dev/null && git ls-files --error-unmatch '*.go' &> /dev/null; then
+      versions+="Go: $(go version | awk '{print $3}') "
+    fi
+
+  fi
+
+  echo -n "$versions"
 }
